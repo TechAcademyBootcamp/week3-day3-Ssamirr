@@ -467,7 +467,7 @@ font-family: "Lato", sans-serif;
     }
     .js-price-line{
         display: flex;
-        width: 80%;
+        width: 100%;
         justify-content: space-between;
     }
     .js-div5{

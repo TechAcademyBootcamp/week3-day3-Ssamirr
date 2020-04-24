@@ -24,7 +24,7 @@ for (var i = 0; i < buttons.length; i++) {
       var all_sum;
       all_sum = parseFloat(all_sum).toFixed(2);
       all_sum = parseFloat(document.querySelector('.all-sum').textContent);
-      all_sum = all_sum + card_price;
+      all_sum = parseFloat(all_sum + card_price).toFixed(2);
       console.log(all_sum);
       all_sum = parseFloat(all_sum).toFixed(2);
       document.querySelectorAll('.all-sum').forEach((Element) => {
@@ -184,8 +184,16 @@ for (var i = 0; i < buttons.length; i++) {
       let card_group_sum = document.createElement('p');
       card_group_sum.classList.add('products-money');
       card_group_sum.innerText = sum;
+      let card_group_exit = document.createElement('span');
+      card_group_exit.style.marginLeft = "20px";
+      card_group_exit.innerHTML = `<svg class="elmnt3 backet2 js-exit" xmlns="http://www.w3.org/2000/svg" width="10.003" height="10" viewBox="0 0 10.003 10">
+      <path data-name="_ionicons_svg_ios-close (5)" d="M166.686,165.55l3.573-3.573a.837.837,0,0,0-1.184-1.184l-3.573,3.573-3.573-3.573a.837.837,0,1,0-1.184,1.184l3.573,3.573-3.573,3.573a.837.837,0,0,0,1.184,1.184l3.573-3.573,3.573,3.573a.837.837,0,0,0,1.184-1.184Z" transform="translate(-160.5 -160.55)" fill="currentColor"></path>
+  </svg>`
+
+
       card_group_div5.appendChild(card_group_sign_money);
       card_group_div5.appendChild(card_group_sum);
+      card_group_div5.appendChild(card_group_exit);
       card_group_div4.appendChild(card_group_div5);
 
       let card_group_div6 = document.createElement('div');
@@ -212,26 +220,81 @@ for (var i = 0; i < buttons.length; i++) {
 
       card_products.appendChild(card_group_div1);
 
-    
-      document.querySelectorAll('.increase').forEach((element) => {
-        console.log(element);
 
-        element.addEventListener('click', function () {
-          console.log(this);
-          let parent_plus_buttons = this.closest('.card');
-          let product_count2=parseInt(parent_plus_buttons.querySelector('.products-count').textContent);
-          console.log(product_count2);
-          product_count2++;
-          console.log(product_count2);
-          sum = product_count2 * card_price;
-          parent_plus_buttons.querySelectorAll('.products-count').forEach((Element) => {
-            Element.innerHTML = product_count2;
-          })
-          parent_plus_buttons.querySelectorAll('.products-money').forEach((Element) => {
-            Element.innerHTML = sum;
-          })
+      function itemRemove(x) {
+        let exit_button = x.closest('.card');
+        let product_count = parseInt(exit_button.querySelector('.products-count').textContent);
+        let product_allsum = parseFloat(document.querySelector('.all-sum').textContent);
+        let product_sum = parseFloat(exit_button.querySelector('.products-money').textContent)
+        let product_cardprice = exit_button.querySelector('.card-text').innerHTML;
+        product_cardprice = parseFloat(product_cardprice.replace('$', ''));
+        let product_item = parseInt(document.querySelector('.backet-item').textContent);
+        product_allsum = parseFloat(product_allsum - product_sum).toFixed(2);
+        product_count = parseInt(product_count);
+        console.log(product_allsum);
+        product_item--;
+        exit_button.remove();
+        document.querySelectorAll('.backet-item').forEach((items) => {
+          items.innerHTML = product_item;
+        })
+        exit_button.querySelectorAll('.products-money').forEach((element) => {
+          element.innerHTML = product_sum;
+        })
+        exit_button.querySelectorAll('.products-count').forEach((element) => {
+          element.innerHTML = product_count;
+        })
+        document.querySelectorAll('.all-sum').forEach((element) => {
+          element.innerHTML = product_allsum;
+        })
+      }
+
+      card_group_increase.addEventListener('click', function () {
+        let parent_plus_buttons = this.closest('.card');
+        let product_count = parseInt(parent_plus_buttons.querySelector('.products-count').textContent);
+        let product_allsum = parseFloat(document.querySelector('.all-sum').textContent);
+        product_count++;
+        sum = product_count * card_price;
+        product_allsum = parseFloat(product_allsum + card_price).toFixed(2);
+        document.querySelectorAll('.all-sum').forEach((element) => {
+          element.innerHTML = product_allsum;
+        })
+        parent_plus_buttons.querySelectorAll('.products-count').forEach((element) => {
+          element.innerHTML = product_count;
+        })
+        parent_plus_buttons.querySelectorAll('.products-money').forEach((element) => {
+          element.innerHTML = sum;
         })
       })
+
+      card_group_decrease.addEventListener('click', function () {
+        let parent_minus_buttons = this.closest('.card');
+        let product_count = parseInt(parent_minus_buttons.querySelector('.products-count').textContent);
+        let product_allsum = parseFloat(document.querySelector('.all-sum').textContent);
+        product_count--;
+        if(product_count==0){
+          itemRemove(this);
+        }
+        sum = product_count * card_price;
+        product_allsum = parseFloat(product_allsum - card_price).toFixed(2);
+        document.querySelectorAll('.all-sum').forEach((element) => {
+          element.innerHTML = product_allsum;
+        })
+        parent_minus_buttons.querySelectorAll('.products-count').forEach((element) => {
+          element.innerHTML = product_count;
+        })
+        parent_minus_buttons.querySelectorAll('.products-money').forEach((element) => {
+          element.innerHTML = sum;
+        })
+      })
+
+
+
+
+
+      card_group_exit.addEventListener('click', function () {
+        itemRemove(this);
+      })
+
 
     }
     else {
