@@ -441,3 +441,35 @@ font-weight: 700;
 color: rgb(13, 17, 54);
 font-family: "Lato", sans-serif;
     }
+    .jsleft{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+    .js-inc-dec{
+        display:flex;
+        flex-direction:column;
+        font-size: 25px;
+        border: 1px solid black;
+        border-radius: 200px;
+        width: 30px;
+        background: #f7f7f7;
+        border-style:none;
+    }
+    .js-img-style{
+        width:60px;
+        height:60px;
+    }
+    .js-card-body{
+        display: flex;
+        flex-direction: column; 
+        align-items: flex-start;
+    }
+    .js-price-line{
+        display: flex;
+        width: 80%;
+        justify-content: space-between;
+    }
+    .js-div5{
+        display: flex;
+    }
