@@ -429,6 +429,7 @@ header{
 }
 .sagterefscroll{
     height: 400px !important;
+    background-size: co
 }
 }
 #name-input{
@@ -439,6 +440,13 @@ header{
     color: rgb(22, 31, 106);
 }
 #unit-input{
+    font-family: "Lato", sans-serif;
+    padding: 8px 10px;
+    font-size: 16px;
+    font-weight: 700;
+    color: rgb(22, 31, 106);
+}
+#price-input{
     font-family: "Lato", sans-serif;
     padding: 8px 10px;
     font-size: 16px;

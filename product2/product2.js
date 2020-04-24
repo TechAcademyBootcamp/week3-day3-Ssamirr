@@ -7,6 +7,8 @@ for(var i=0;i<card.length;i++){
         var card_name=card_body_parent.getElementsByClassName("cardname")[0].innerHTML;
         var card_lb=card_body_parent.getElementsByClassName("cardlb")[0].innerHTML;
         var card_price=card_body_parent.getElementsByClassName("cardmoney")[0].innerHTML;
+        card_price=parseInt(card_price.replace('$',''));
+        
         
 
         // document.getElementById('card-img').setAttribute('src',card_img_src) ;
