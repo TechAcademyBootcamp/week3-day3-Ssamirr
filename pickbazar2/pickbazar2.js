@@ -28,6 +28,7 @@ for (var i = 0; i < buttons.length; i++) {
       // console.log(all_sum);
       all_sum = parseFloat(all_sum).toFixed(2);
 
+      
       if (!target_element.closest('.kart').classList.contains('d-flex')) {
         document.querySelectorAll('.all-sum').forEach((Element) => {
           Element.innerHTML = all_sum;
@@ -239,23 +240,59 @@ for (var i = 0; i < buttons.length; i++) {
         let product_allsum = parseFloat(document.querySelector('.all-sum').textContent);
         product_count++;
         sum = product_count * card_price;
+        console.log(sum);
         product_allsum = parseFloat(product_allsum + card_price).toFixed(2);
+       
+       parent.forEach((parent_element)=>{
         document.querySelectorAll('.all-sum').forEach((element) => {
           element.innerHTML = product_allsum;
         })
-
+      })
         parent.forEach((parent_element) => {
           parent_element.querySelectorAll('.products-count').forEach((element) => {
             element.innerHTML = product_count;
           })
         })
 
-        parent_plus_buttons.querySelectorAll('.products-money').forEach((element) => {
+        parent.forEach((parent_element)=>{
+        parent_element.querySelectorAll('.products-money').forEach((element) => {
           element.innerHTML = sum;
         })
+      })
+      }
+
+      function removeItem(x){
+        let parent=document.querySelectorAll(`[product_title="${card_title}"]`)
+        let parent_minus_buttons = x.closest('.card');
+        let product_count = parseInt(parent_minus_buttons.querySelector('.products-count').textContent);
+        let product_allsum = parseFloat(document.querySelector('.all-sum').textContent);
+        product_count--;
+        sum = product_count * card_price;
+        product_allsum = parseFloat(product_allsum - card_price).toFixed(2);
+        
+        parent.forEach((parent_element)=>{
+        document.querySelectorAll('.all-sum').forEach((element) => {
+          element.innerHTML = product_allsum;
+        })
+      })
+        parent.forEach((parent_element) => {
+          parent_element.querySelectorAll('.products-count').forEach((element) => {
+            element.innerHTML = product_count;
+          })
+        })
+
+        parent.forEach((parent_element)=>{
+        parent_element.querySelectorAll('.products-money').forEach((element) => {
+          element.innerHTML = sum;
+        })
+      })
+
+      
 
       }
 
+      
+      
 
       function itemRemove(x) {
         let exit_button = x.closest('.card');
@@ -291,24 +328,8 @@ for (var i = 0; i < buttons.length; i++) {
 
 
       card_group_decrease.addEventListener('click', function () {
-        let parent_minus_buttons = this.closest('.card');
-        let product_count = parseInt(parent_minus_buttons.querySelector('.products-count').textContent);
-        let product_allsum = parseFloat(document.querySelector('.all-sum').textContent);
-        product_count--;
-        if (product_count == 0) {
-          itemRemove(this);
-        }
-        sum = product_count * card_price;
-        product_allsum = parseFloat(product_allsum - card_price).toFixed(2);
-        document.querySelectorAll('.all-sum').forEach((element) => {
-          element.innerHTML = product_allsum;
-        })
-        parent_minus_buttons.querySelectorAll('.products-count').forEach((element) => {
-          element.innerHTML = product_count;
-        })
-        parent_minus_buttons.querySelectorAll('.products-money').forEach((element) => {
-          element.innerHTML = sum;
-        })
+        removeItem(this);
+        
       })
 
 
@@ -340,9 +361,11 @@ for (var i = 0; i < buttons.length; i++) {
       kart_plus.addEventListener('click', function () {
         addItem(this);
       })
+      kart_minus.addEventListener('click', function () {
+        removeItem(this);
+      })
 
-
-
+      
 
 
 
