@@ -6,8 +6,8 @@ for (var i = 0; i < buttons.length; i++) {
     var target_element = event.target;
 
 
-
     if (target_element.closest('.kart') != null) {
+
 
       var card_title = card_body_parent.getElementsByClassName("card-title")[0].innerHTML;
       var card_pc = card_body_parent.getElementsByClassName("card-text")[0].innerHTML;
@@ -34,28 +34,32 @@ for (var i = 0; i < buttons.length; i++) {
 
 
       if (added_product) {
-        count = parseFloat(added_product.querySelector('.products-count').textContent);
-        // count = parseFloat(added_product.querySelector('.products-count2').textContent);
-        count++;
+        console.log('aaf');
+        if (!target_element.closest('.kart').classList.contains('d-flex')) {
+          console.log(target_element.closest('.kart'))
+          count = parseFloat(added_product.querySelector('.products-count').textContent);
+          // count = parseFloat(added_product.querySelector('.products-count2').textContent);
+          count++;
 
-        sum = card_price * count;
+          sum = card_price * count;
 
-        sum = parseFloat(sum).toFixed(2);
-        added_product.querySelectorAll('.products-count').forEach((Element) => {
-          Element.innerHTML = count;
-        })
-        added_product.querySelectorAll('.products-money').forEach((Element) => {
-          Element.innerHTML = sum;
-        })
-
-
-
-
-
+          sum = parseFloat(sum).toFixed(2);
+          added_product.querySelectorAll('.products-count').forEach((Element) => {
+            Element.innerHTML = count;
+          })
+          added_product.querySelectorAll('.products-money').forEach((Element) => {
+            Element.innerHTML = sum;
+          })
 
 
 
-        // added_product.querySelector('.products-count2').innerHTML = count;
+
+
+
+
+
+          // added_product.querySelector('.products-count2').innerHTML = count;
+        }
         return false;
       }
 
@@ -305,40 +309,44 @@ for (var i = 0; i < buttons.length; i++) {
 
 
 
-      // let change_kart = document.querySelectorAll('.kart');
-      // let kart_minus = document.createElement('span');
+      let change_kart = this.querySelector('.kart');
+      let kart_minus = card_group_decrease.cloneNode(true);
+      change_kart.classList.add('d-flex');
+      change_kart.innerHTML = '';
       // kart_minus.innerText = '-';
-      // var jcount = parseFloat(document.querySelector('.products-count').textContent);
-      // let kart_number = document.createElement('span');
+      // let jcount = parseFloat(document.querySelector('.products-count').textContent);
+      let kart_number = card_group_count.cloneNode(true);
       // kart_number.innerText = jcount;
-      // let kart_plus = document.createElement('span');
+      let kart_plus = card_group_increase.cloneNode(true);
       // kart_plus.innerText = '+';
-      // change_kart.appendChild(kart_minus);
-      // change_kart.appendChild(kart_number);
-      // change_kart.appendChild(kart_plus);
-
-  
+      change_kart.appendChild(kart_minus);
+      change_kart.appendChild(kart_number);
+      change_kart.appendChild(kart_plus);
 
 
 
 
 
-}
+
+
+
+    }
+
     else {
-  document.querySelector('#cardbutton').click();
-  let card_img_top=this.querySelector('.card-img-top').getAttribute('src');
-  document.querySelector('.product-image').setAttribute('src',card_img_top);
-  document.querySelectorAll('.subproduct-image').forEach((element)=>{
-      element.setAttribute('src',card_img_top);
-  let card_img_title=this.querySelector('.card-title').innerText;
-  document.querySelector('.modal-title').innerText=card_img_title;
-  let card_img_text=this.querySelector('.card-text').innerText;
-  document.querySelector('.modal-pc').innerText=card_img_text;
-  let card_img_money=this.querySelector('.card-money').innerText;
-  document.querySelector('.pul').innerText=card_img_money;
-  })
-  
-}
+      document.querySelector('#cardbutton').click();
+      let card_img_top = this.querySelector('.card-img-top').getAttribute('src');
+      document.querySelector('.product-image').setAttribute('src', card_img_top);
+      document.querySelectorAll('.subproduct-image').forEach((element) => {
+        element.setAttribute('src', card_img_top);
+        let card_img_title = this.querySelector('.card-title').innerText;
+        document.querySelector('.modal-title').innerText = card_img_title;
+        let card_img_text = this.querySelector('.card-text').innerText;
+        document.querySelector('.modal-pc').innerText = card_img_text;
+        let card_img_money = this.querySelector('.card-money').innerText;
+        document.querySelector('.pul').innerText = card_img_money;
+      })
+
+    }
   })
 
 }
