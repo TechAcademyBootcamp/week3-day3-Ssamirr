@@ -19,24 +19,24 @@ for (var i = 0; i < buttons.length; i++) {
       card_price = parseFloat(card_price.replace('$', ''));
       var sum = card_price;
       sum = parseFloat(sum).toFixed(2);
-      var added_product = document.querySelector(`[product_title="${card_title}"]`);
+      var added_product = document.querySelector(`[product_title1="${card_title}"]`);
 
       var all_sum;
       all_sum = parseFloat(all_sum).toFixed(2);
       all_sum = parseFloat(document.querySelector('.all-sum').textContent);
       all_sum = parseFloat(all_sum + card_price).toFixed(2);
-      console.log(all_sum);
+      // console.log(all_sum);
       all_sum = parseFloat(all_sum).toFixed(2);
-      document.querySelectorAll('.all-sum').forEach((Element) => {
-        Element.innerHTML = all_sum;
-      })
 
+      if (!target_element.closest('.kart').classList.contains('d-flex')) {
+        document.querySelectorAll('.all-sum').forEach((Element) => {
+          Element.innerHTML = all_sum;
+        })
+      }
 
 
       if (added_product) {
-        console.log('aaf');
         if (!target_element.closest('.kart').classList.contains('d-flex')) {
-          console.log(target_element.closest('.kart'))
           count = parseFloat(added_product.querySelector('.products-count').textContent);
           // count = parseFloat(added_product.querySelector('.products-count2').textContent);
           count++;
@@ -129,6 +129,8 @@ for (var i = 0; i < buttons.length; i++) {
       card_group_div1.classList.add('card');
       card_group_div1.style.maxWidth = "540px";
       card_group_div1.setAttribute("product_title", card_title);
+      card_group_div1.setAttribute("product_title1", card_title);
+
 
       let card_group_div2 = document.createElement('div');
       card_group_div2.classList.add('row', 'no-gutters');
@@ -229,6 +231,32 @@ for (var i = 0; i < buttons.length; i++) {
       card_products.appendChild(card_group_div1);
 
 
+
+      function addItem(x) {
+        let parent = document.querySelectorAll(`[product_title="${card_title}"]`);
+        let parent_plus_buttons = x.closest('.card');
+        let product_count = parseInt(parent_plus_buttons.querySelector('.products-count').textContent);
+        let product_allsum = parseFloat(document.querySelector('.all-sum').textContent);
+        product_count++;
+        sum = product_count * card_price;
+        product_allsum = parseFloat(product_allsum + card_price).toFixed(2);
+        document.querySelectorAll('.all-sum').forEach((element) => {
+          element.innerHTML = product_allsum;
+        })
+
+        parent.forEach((parent_element) => {
+          parent_element.querySelectorAll('.products-count').forEach((element) => {
+            element.innerHTML = product_count;
+          })
+        })
+
+        parent_plus_buttons.querySelectorAll('.products-money').forEach((element) => {
+          element.innerHTML = sum;
+        })
+
+      }
+
+
       function itemRemove(x) {
         let exit_button = x.closest('.card');
         let product_count = parseInt(exit_button.querySelector('.products-count').textContent);
@@ -257,21 +285,7 @@ for (var i = 0; i < buttons.length; i++) {
       }
 
       card_group_increase.addEventListener('click', function () {
-        let parent_plus_buttons = this.closest('.card');
-        let product_count = parseInt(parent_plus_buttons.querySelector('.products-count').textContent);
-        let product_allsum = parseFloat(document.querySelector('.all-sum').textContent);
-        product_count++;
-        sum = product_count * card_price;
-        product_allsum = parseFloat(product_allsum + card_price).toFixed(2);
-        document.querySelectorAll('.all-sum').forEach((element) => {
-          element.innerHTML = product_allsum;
-        })
-        parent_plus_buttons.querySelectorAll('.products-count').forEach((element) => {
-          element.innerHTML = product_count;
-        })
-        parent_plus_buttons.querySelectorAll('.products-money').forEach((element) => {
-          element.innerHTML = sum;
-        })
+        addItem(this);
       })
 
 
@@ -323,6 +337,9 @@ for (var i = 0; i < buttons.length; i++) {
       change_kart.appendChild(kart_number);
       change_kart.appendChild(kart_plus);
 
+      kart_plus.addEventListener('click', function () {
+        addItem(this);
+      })
 
 
 
