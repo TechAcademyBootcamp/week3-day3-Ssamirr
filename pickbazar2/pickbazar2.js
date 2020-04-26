@@ -30,6 +30,9 @@ for (var i = 0; i < buttons.length; i++) {
       document.querySelectorAll('.all-sum').forEach((Element) => {
         Element.innerHTML = all_sum;
       })
+
+
+
       if (added_product) {
         count = parseFloat(added_product.querySelector('.products-count').textContent);
         // count = parseFloat(added_product.querySelector('.products-count2').textContent);
@@ -44,6 +47,7 @@ for (var i = 0; i < buttons.length; i++) {
         added_product.querySelectorAll('.products-money').forEach((Element) => {
           Element.innerHTML = sum;
         })
+
 
 
 
@@ -266,12 +270,14 @@ for (var i = 0; i < buttons.length; i++) {
         })
       })
 
+
+
       card_group_decrease.addEventListener('click', function () {
         let parent_minus_buttons = this.closest('.card');
         let product_count = parseInt(parent_minus_buttons.querySelector('.products-count').textContent);
         let product_allsum = parseFloat(document.querySelector('.all-sum').textContent);
         product_count--;
-        if(product_count==0){
+        if (product_count == 0) {
           itemRemove(this);
         }
         sum = product_count * card_price;
@@ -296,14 +302,46 @@ for (var i = 0; i < buttons.length; i++) {
       })
 
 
-    }
+
+
+
+      // let change_kart = document.querySelectorAll('.kart');
+      // let kart_minus = document.createElement('span');
+      // kart_minus.innerText = '-';
+      // var jcount = parseFloat(document.querySelector('.products-count').textContent);
+      // let kart_number = document.createElement('span');
+      // kart_number.innerText = jcount;
+      // let kart_plus = document.createElement('span');
+      // kart_plus.innerText = '+';
+      // change_kart.appendChild(kart_minus);
+      // change_kart.appendChild(kart_number);
+      // change_kart.appendChild(kart_plus);
+
+  
+
+
+
+
+
+}
     else {
-      document.querySelector('#cardbutton').click();
-    }
+  document.querySelector('#cardbutton').click();
+  let card_img_top=this.querySelector('.card-img-top').getAttribute('src');
+  document.querySelector('.product-image').setAttribute('src',card_img_top);
+  document.querySelectorAll('.subproduct-image').forEach((element)=>{
+      element.setAttribute('src',card_img_top);
+  let card_img_title=this.querySelector('.card-title').innerText;
+  document.querySelector('.modal-title').innerText=card_img_title;
+  let card_img_text=this.querySelector('.card-text').innerText;
+  document.querySelector('.modal-pc').innerText=card_img_text;
+  let card_img_money=this.querySelector('.card-money').innerText;
+  document.querySelector('.pul').innerText=card_img_money;
+  })
+  
+}
   })
 
 }
-
 
 
 

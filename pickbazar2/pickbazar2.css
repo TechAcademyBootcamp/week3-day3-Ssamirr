@@ -311,6 +311,7 @@ body{
         font-family: "Poppins", sans-serif;
         font-weight: 700;
         font-size: 21px;
+        line-height: 1.2;
     } 
     .pc{
         font-size: 13px;
@@ -328,11 +329,12 @@ body{
     }
     .pul{
         color: rgb(0, 158, 127);
-        font-size: 19px;
+        font-size: 16px;
         font-family: 'Lato', sans-serif;
         font-weight: 900 !important;
-        margin-top: 60px;
-        margin-bottom:40px; 
+        margin: 0px 0px 0px 80px !important;
+        line-height: 1.5;
+
     }
     .rounded-pill.border.bg-white.p-2.pr-4.pl-4{
         color: rgb(0, 158, 127);
